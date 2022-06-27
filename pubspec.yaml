@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.4
+  mysql1: ^0.19.2
   neon: ^0.1.0
   pull_to_refresh: ^2.0.0
 

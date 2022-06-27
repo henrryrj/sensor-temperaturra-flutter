@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
     PushNotificationService.messageString.listen((message) {
       //debugPrint('Myapp ===> $message');
       navigatorKey.currentState?.pushNamed('home', arguments: message);
-      final snackBar = SnackBar(content: Text(message));
+      final snackBar = SnackBar(content: Text(message), backgroundColor: Colors.blue.shade300);
       scafolKey.currentState?.showSnackBar(snackBar);
     });
   }
