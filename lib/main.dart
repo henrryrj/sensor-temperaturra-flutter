@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lista_app/screens/grafica_screen.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lista_app/screens/lista_screens.dart';
 import 'package:lista_app/services/push_notifications_services.dart';
+import 'package:lista_app/screens/historial_screens.dart';
 
 /* const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -60,7 +62,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "home",
       navigatorKey: navigatorKey, //navegar
       scaffoldMessengerKey: scafolKey, //snak
-      routes: {"home": (_) => const ListaScreen()},
+      routes: {"home": (_) => ListaScreen(),
+      "historial": (_) => HistorialScreen()},
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lista_app/models/dispositivo_model.dart';
+import 'package:lista_app/screens/grafica_screen.dart';
+import 'package:lista_app/screens/historial_screens.dart';
 
 class DispositivoCard extends StatelessWidget {
   final Dispositivo dispositivo;
@@ -9,12 +11,12 @@ class DispositivoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      color: Colors.blue.shade100,
+      elevation: 10,
+      color: Colors.lightBlue.shade100,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           //border: Border.all(color: const Color.fromRGBO(164, 164, 166, 1.0)),
@@ -24,7 +26,16 @@ class DispositivoCard extends StatelessWidget {
             titulo(dispositivo.id.toString()),
             listaPropiedades(
                 dispositivo.tem.toString(), dispositivo.hum.toString()),
-            propiedades("Ultimo Registro: ", dispositivo.ultimoRegistro)
+            propiedades("bUltimo Registro: ", dispositivo.ultimoRegistro),
+            ElevatedButton(
+                //style: const ButtonStyle(backgroundColor: MaterialColor(Colors.accents, swatch)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GraficaScreen()),
+                  );
+                },
+                child: Text('ver historial'))
           ],
         ),
       ),
