@@ -24,8 +24,8 @@ class _ListaScreenState extends State<ListaScreen> {
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.blue.shade300,
-            title: const Text('Sistemas Distribuidos'),
+            backgroundColor: Colors.indigoAccent.shade100,
+            title: const Text('Monitor de Temperatura'),
             elevation: 1),
         body: FutureBuilder(
           future: _getDispositivos(),
@@ -41,20 +41,26 @@ class _ListaScreenState extends State<ListaScreen> {
 
   Widget _listViewDispositivos() {
     return SmartRefresher(
+      
       controller: _refreshController,
       enablePullDown: true,
       onRefresh: _cargarDispositivos,
       header: WaterDropHeader(
-        complete: Icon(Icons.check, color: Colors.blue.shade300),
-        waterDropColor: Colors.blue.shade300,
+        complete: Icon(Icons.check, color: Colors.indigoAccent.shade100),
+        waterDropColor: Colors.indigoAccent.shade100,
       ),
+      
       child: listaDisp.isEmpty
           ? Center(child: titulo("Sin Dispositivos!"))
           : ListView.separated(
-              itemBuilder: (_, i) => DispositivoCard(dispositivo: listaDisp[i]),
+              itemBuilder: (_, i) => DispositivoCard(
+                dispositivo: listaDisp[i], 
+              ),
+              
               separatorBuilder: (_, i) => const Divider(),
               itemCount: listaDisp.length,
             ),
+            
     );
   }
 

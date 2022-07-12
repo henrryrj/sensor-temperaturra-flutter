@@ -13,12 +13,12 @@ class DispositivoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      color: Colors.blue.shade100,
+      elevation: 10,
+      color: Colors.lightBlue.shade100,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           //border: Border.all(color: const Color.fromRGBO(164, 164, 166, 1.0)),
