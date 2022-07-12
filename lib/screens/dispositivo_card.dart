@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lista_app/models/chart_data.dart';
 import 'package:lista_app/models/dispositivo_model.dart';
+import 'package:lista_app/models/monitor_model.dart';
+
+import '../services/dispositivo_service.dart';
 
 class DispositivoCard extends StatelessWidget {
   final Dispositivo dispositivo;
@@ -24,8 +28,41 @@ class DispositivoCard extends StatelessWidget {
             titulo(dispositivo.id.toString()),
             listaPropiedades(
                 dispositivo.tem.toString(), dispositivo.hum.toString()),
-            propiedades("Ultimo Registro: ", dispositivo.ultimoRegistro)
+            propiedades("Ultimo Registro: ", dispositivo.ultimoRegistro),
+            verGraficaButton(context, dispositivo)
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget verGraficaButton(BuildContext context, Dispositivo disp) {
+    final dispositivoService = DispositivoService();
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          primary: const Color.fromRGBO(61, 61, 61, 1.0),
+        ),
+        onPressed: () async {
+          List<Monitor> lista =
+              await dispositivoService.getHistorialPorDia(disp.id);
+          Navigator.pushNamed(context, 'graphScreen', arguments: ChartData(disp, lista));
+/*           Navigator.pushNamed(context, 'encuestaNoRelacional',
+              arguments: widget.encuesta);
+          final aplicacionService =
+              Provider.of<AplicacionService>(context, listen: false);
+          aplicacionService.aplicacionMode = false; */
+        },
+        child: const Center(
+          child: Text(
+            'Ver Grafica',
+            style: TextStyle(fontSize: 15.0),
+          ),
         ),
       ),
     );

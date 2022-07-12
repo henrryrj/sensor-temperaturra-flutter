@@ -84,4 +84,5 @@ class _ListaScreenState extends State<ListaScreen> {
     listaDisp = await dispositivoService.getDispositivos();
     return listaDisp;
   }
+   
 }

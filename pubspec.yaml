@@ -30,6 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.18.0
   firebase_messaging: ^11.4.2
+  dependencies:
+  charts_flutter: ^0.12.0
+  syncfusion_flutter_charts: ^20.2.36
+  font_awesome_flutter: any
   flutter:
     sdk: flutter
   http: ^0.13.4
