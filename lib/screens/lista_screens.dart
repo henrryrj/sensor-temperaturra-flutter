@@ -24,8 +24,8 @@ class _ListaScreenState extends State<ListaScreen> {
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.indigoAccent.shade100,
-            title: const Text('Monitor de Temperatura'),
+            backgroundColor: Colors.blue.shade300,
+            title: const Text('Lista de Dispositivos'),
             elevation: 1),
         body: FutureBuilder(
           future: _getDispositivos(),
@@ -41,7 +41,6 @@ class _ListaScreenState extends State<ListaScreen> {
 
   Widget _listViewDispositivos() {
     return SmartRefresher(
-      
       controller: _refreshController,
       enablePullDown: true,
       onRefresh: _cargarDispositivos,

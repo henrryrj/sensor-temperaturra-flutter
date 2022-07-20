@@ -1,18 +1,14 @@
 import 'dart:convert';
 
 class Monitor {
-  int id;
-  double tem;
-  double hum;
+  double temp;
   String time;
-  int idCliente;
+  String idDispositivo;
 
   Monitor({
-    required this.id,
-    required this.tem,
-    required this.hum,
+    required this.temp,
     required this.time,
-    required this.idCliente 
+    required this.idDispositivo,
   });
 
   Monitor dispositivoFromJson(String str) =>
@@ -21,18 +17,14 @@ class Monitor {
   String dispositivoToJson(Monitor data) => json.encode(data.toJson());
 
   factory Monitor.fromJson(Map<String, dynamic> json) => Monitor(
-        id: json["id"],
-        tem: json["Tem"].toDouble(),
-        hum: json["Hum"].toDouble(),
-        time: json["ultimoRegistro"],
-        idCliente: json["estado"].toInt()
+        temp: json["temp"].toDouble(),
+        time: json["time"],
+        idDispositivo: json["idDispositivo"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "Tem": tem,
-        "Hum": hum,
-        "ultimoRegistro": time,
-        "estado": idCliente
+        "temp": temp,
+        "time": time,
+        "idDispositivo": idDispositivo
       };
 }

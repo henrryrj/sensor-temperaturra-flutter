@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lista_app/models/chart_data.dart';
 import 'package:lista_app/models/dispositivo_model.dart';
-import 'package:lista_app/models/monitor_model.dart';
-
-import '../services/dispositivo_service.dart';
 
 class DispositivoCard extends StatelessWidget {
   final Dispositivo dispositivo;
@@ -27,7 +23,7 @@ class DispositivoCard extends StatelessWidget {
           children: [
             titulo(dispositivo.id.toString()),
             listaPropiedades(
-                dispositivo.tem.toString(), dispositivo.hum.toString()),
+                dispositivo.temp.toString(), dispositivo.hum.toString()),
             propiedades("Ultimo Registro: ", dispositivo.ultimoRegistro),
             verGraficaButton(context, dispositivo)
           ],
@@ -37,7 +33,6 @@ class DispositivoCard extends StatelessWidget {
   }
 
   Widget verGraficaButton(BuildContext context, Dispositivo disp) {
-    final dispositivoService = DispositivoService();
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: ElevatedButton(
@@ -49,9 +44,7 @@ class DispositivoCard extends StatelessWidget {
           primary: const Color.fromRGBO(61, 61, 61, 1.0),
         ),
         onPressed: () async {
-          List<Monitor> lista =
-              await dispositivoService.getHistorialPorDia(disp.id);
-          Navigator.pushNamed(context, 'graphScreen', arguments: ChartData(disp, lista));
+          Navigator.pushNamed(context, 'graphScreen', arguments: disp);
 /*           Navigator.pushNamed(context, 'encuestaNoRelacional',
               arguments: widget.encuesta);
           final aplicacionService =
@@ -82,10 +75,10 @@ class DispositivoCard extends StatelessWidget {
                         color: Colors.black54,
                         fontWeight: FontWeight.bold)),
                 Expanded(child: Container()),
-                Text(dispositivo.estado == 1 ? 'Off: ' : 'On: ',
+                Text(dispositivo.estado == false ? 'Off: ' : 'On: ',
                     style: TextStyle(
                         fontSize: 15.0,
-                        color: dispositivo.estado == 1
+                        color: dispositivo.estado == false
                             ? Colors.black54
                             : Colors.green,
                         fontWeight: FontWeight.bold)),
@@ -93,7 +86,7 @@ class DispositivoCard extends StatelessWidget {
                   width: 17,
                   height: 17,
                   decoration: BoxDecoration(
-                      color: dispositivo.estado == 1
+                      color: dispositivo.estado == false
                           ? Colors.grey.shade600
                           : Colors.green,
                       borderRadius: BorderRadius.circular(150)),

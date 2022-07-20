@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lista_app/screens/graph_screen.dart';
 import 'package:lista_app/screens/lista_screens.dart';
 import 'package:lista_app/services/push_notifications_services.dart';
-import 'package:lista_app/screens/historial_screens.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class Dispositivo {
-  int id;
-  double? tem;
+  String id;
+  double? temp;
   double? hum;
   String ultimoRegistro;
-  int estado;
+  bool estado;
 
   Dispositivo({
     required this.id,
-    this.tem,
+    this.temp,
     this.hum,
     required this.ultimoRegistro,
     required this.estado 
@@ -22,16 +22,16 @@ class Dispositivo {
 
   factory Dispositivo.fromJson(Map<String, dynamic> json) => Dispositivo(
         id: json["id"],
-        tem: json["Tem"].toDouble(),
-        hum: json["Hum"].toDouble(),
+        temp: json["temp"].toDouble(),
+        hum: json["hum"].toDouble(),
         ultimoRegistro: json["ultimoRegistro"],
-        estado: json["estado"].toInt()
+        estado: json["estado"]
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Tem": tem,
-        "Hum": hum,
+        "temp": temp,
+        "hum": hum,
         "ultimoRegistro": ultimoRegistro,
         "estado": estado
       };
