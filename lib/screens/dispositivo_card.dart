@@ -37,11 +37,10 @@ class DispositivoCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          elevation: 0.0,
+          elevation: 0.0, backgroundColor: const Color.fromRGBO(61, 61, 61, 1.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
           ),
-          primary: const Color.fromRGBO(61, 61, 61, 1.0),
         ),
         onPressed: () async {
           Navigator.pushNamed(context, 'graphScreen', arguments: disp);

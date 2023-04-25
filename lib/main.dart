@@ -28,7 +28,8 @@ class _MyAppState extends State<MyApp> {
     PushNotificationService.messageString.listen((message) {
       //debugPrint('Myapp ===> $message');
       navigatorKey.currentState?.pushNamed('home', arguments: message);
-      final snackBar = SnackBar(content: Text(message), backgroundColor: Colors.blue.shade300);
+      final snackBar = SnackBar(
+          content: Text(message), backgroundColor: Colors.blue.shade300);
       scafolKey.currentState?.showSnackBar(snackBar);
     });
   }
@@ -36,14 +37,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "home",
-      navigatorKey: navigatorKey, //navegar
-      scaffoldMessengerKey: scafolKey, //snak
-      routes: {
-        "home": (_) => const ListaScreen(),
-        "graphScreen": (_) => const GraphScreen()
-      }
-    );
+        debugShowCheckedModeBanner: false,
+        initialRoute: "home",
+        navigatorKey: navigatorKey, //navegar
+        scaffoldMessengerKey: scafolKey, //snak
+        routes: {
+          "home": (_) => const ListaScreen(),
+          "graphScreen": (_) => const GraphScreen()
+        });
   }
 }

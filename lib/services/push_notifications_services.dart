@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lista_app/models/mysql1_model.dart';
+import 'package:lista_app/services/dispositivo_service.dart';
 
 class PushNotificationService {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -41,17 +42,21 @@ class PushNotificationService {
     token = await FirebaseMessaging.instance.getToken();
     // Guardar token de todos los dispositivos!!!!
     debugPrint('TOKEN FIREBASE -------> $token');
-    dbMysql.getConnection().then((conn) {
-      sql = 'select id from tokendisp where id = ?';
-      conn.query(sql!, [token]).then((value) {
-        if (value.isEmpty) {
-          sqlInsert = 'insert into tokendisp(id) values(?)';
-          conn.query(sqlInsert!, [token]).then((value) {
-            debugPrint(value.toString());
-          });
-        }
-      });
-    });
+    final dispositivoService = DispositivoService();
+
+    await dispositivoService.saveToken(token!);
+    // dbMysql.getConnection().then((conn) {
+    //   debugPrint('SE GUARDA EL TOKEN????');
+    //   sql = 'select id from tokendisp where id = ?';
+    //   conn.query(sql!, [token]).then((value) {
+    //     if (value.isEmpty) {
+    //       sqlInsert = 'insert into tokendisp(id) values(?)';
+    //       conn.query(sqlInsert!, [token]).then((value) {
+    //         debugPrint(value.toString());
+    //       });
+    //     }
+    //   });
+    // });
     // HANDLER
     FirebaseMessaging.onBackgroundMessage(_onBrackgroundHandler);
     FirebaseMessaging.onMessage.listen(_onMessageHandler);

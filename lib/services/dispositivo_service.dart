@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:lista_app/models/chart_data.dart';
@@ -7,22 +8,21 @@ import 'package:lista_app/models/dispositivo_model.dart';
 import 'package:lista_app/models/monitor_model.dart';
 
 class DispositivoService {
-  String local = 'http://192.168.0.20:3000';
-  String disqNube = 'https://96b6-177-222-111-203.sa.ngrok.io';
-  String nube = 'https://api-node-mysql-sd.herokuapp.com';
+  String nube = 'https://dace-177-222-36-142.sa.ngrok.io';
+  // String nube = 'https://api-node-mysql-sd.herokuapp.com';
   List<String> grupos = ['https://api-distribuidos-1-2022.herokuapp.com'];
 
   Future<List<Dispositivo>> getDispositivos() async {
     List<Dispositivo> listaDispositivos = [];
     final req = await http.get(Uri.parse('$nube/getDispositivos'));
-    final resp = convert. jsonDecode(req.body);
+    final resp = convert.jsonDecode(req.body);
     listaDispositivos = resp
         .map<Dispositivo>((e) => Dispositivo(
             id: e["id"],
             temp: double.parse(e["temp"]),
             hum: double.parse(e["hum"]),
-            ultimoRegistro: e["ultimoRegistro"],
-            estado: e["estado"]))
+            estado: e["estado"],
+            ultimoRegistro: e["ultimoRegistro"]))
         .toList();
     return listaDispositivos;
   }
@@ -75,5 +75,16 @@ class DispositivoService {
         time: resp["time"],
         estado: resp["estado"]);
     return nuevoDato;
+  }
+
+  Future<void> saveToken(String token) async {
+    final Map<String, dynamic> reqBody = {'id': token};
+    final headers = {'Content-Type': 'application/json'};
+    final encoding = Encoding.getByName('utf-8');
+    final url = Uri.parse('$nube/saveTokenDisp');
+    final resp = await http.post(url,
+        headers: headers, body: json.encode(reqBody), encoding: encoding);
+    final data = jsonEncode(resp.body);
+    print(data.toString());
   }
 }
